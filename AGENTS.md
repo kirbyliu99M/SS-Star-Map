@@ -43,6 +43,7 @@
 ```
 AGENTS.md            ← 本檔（唯一寫規則的 agent 檔）
 CLAUDE.md            ← 只有 @AGENTS.md
+apps/web/AGENTS.md   ← Next.js 自動產生（`next dev` 會加回）：寫 Next 程式前先讀 node_modules/next/dist/docs/。保留，不在裡面加本專案規則
 PROGRESS.md          ← 任務板＋決策摘要＋session log
 apps/web/            ← Next.js
 packages/

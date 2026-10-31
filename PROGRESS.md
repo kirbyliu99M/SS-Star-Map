@@ -21,7 +21,9 @@
 
 ### S0 · repo 可以跑（11/02–11/15）
 - [x] S0-1 AGENTS.md、PROGRESS.md（`.editorconfig`、`.gitattributes`、`.env.example` 待補）
-- [ ] S0-2 monorepo 骨架（apps/web、packages/*、turbo）
+- [x] S0-2 monorepo 骨架（apps/web、packages/*、turbo）— typecheck／lint／build 通過
+  - 版本（exact pin，規則：發布滿 14 天）：next 16.4.2、react 19.3.1、tailwindcss 4.3.3（v4，CSS-first，無 preset）、typescript 5.9.3、eslint 9.39.5、eslint-config-next 16.4.2、turbo 2.11.9、@types/node 24.19.2
+  - TS 7.0、ESLint 10 未採用：create-next-app 16.4.2 範本仍用 TS 5／ESLint 9，Next 對新主版本的支援未查證
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版
 - [ ] S0-4 Supabase config、migration 0001（vector、pg_cron、pg_net）、pgTAP smoke、push 到 staging
 - [ ] S0-4b staging 手動保活腳本（anon key）；**repo 建立前每週跑一次 `pnpm db:ping:staging`**（下次：11/08）
