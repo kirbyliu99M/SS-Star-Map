@@ -97,10 +97,19 @@ pnpm db:start        # 啟動本機 Supabase（需要 Docker Desktop）
 pnpm db:status       # 顯示本機 API、Studio、Mailpit 網址
 pnpm db:reset        # 重建本機 DB＋seed
 pnpm db:stop
+pnpm test:db         # pgTAP（supabase/tests/）
+pnpm db:push:staging # 把 migration 推到 staging（需要 DB 密碼：-p，或先 set -a; . ./.env.staging.local）
+pnpm db:ping:staging # staging 保活
 pnpm supabase <cmd>  # 其他 Supabase CLI 指令
+
+pnpm dev             # Next.js 開發伺服器（apps/web）
+pnpm build
+pnpm lint
+pnpm typecheck
 ```
 
-S0 完成後補上：`pnpm dev`、`pnpm build`、`pnpm lint`、`pnpm typecheck`、`pnpm test`、`pnpm test:db`、`pnpm e2e`。
+S0 完成後補上：`pnpm test`、`pnpm e2e`。
+注意：`supabase migration up` 要加 `--local`，否則可能卡住等待輸入。
 
 ---
 

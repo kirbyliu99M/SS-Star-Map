@@ -25,8 +25,8 @@
   - 版本（exact pin，規則：發布滿 14 天）：next 16.4.2、react 19.3.1、tailwindcss 4.3.3（v4，CSS-first，無 preset）、typescript 5.9.3、eslint 9.39.5、eslint-config-next 16.4.2、turbo 2.11.9、@types/node 24.19.2
   - TS 7.0、ESLint 10 未採用：create-next-app 16.4.2 範本仍用 TS 5／ESLint 9，Next 對新主版本的支援未查證
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版
-- [ ] S0-4 Supabase config、migration 0001（vector、pg_cron、pg_net）、pgTAP smoke、push 到 staging
-- [ ] S0-4b staging 手動保活腳本（anon key）；**repo 建立前每週跑一次 `pnpm db:ping:staging`**（下次：11/08）
+- [x] S0-4 Supabase config（project_id `ss-star-map`）、migration `enable_extensions`（vector、pg_cron、pg_net）、pgTAP smoke、已 push 到 staging
+- [x] S0-4b `public.ping()`＋`scripts/ping-staging.mjs`（anon key）；`pnpm db:ping:staging` 成功。**CI keepalive 上線前每週手動跑一次**（下次：11/08）
 - [ ] S0-5 Supabase client＋環境變數驗證
 - [ ] S0-6 Vitest、Playwright smoke
 - [ ] S0-7 CI（ci.yml、keepalive.yml）〔可延到 S2〕
