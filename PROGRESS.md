@@ -17,7 +17,7 @@
 - [x] Supabase CLI 2.122.0（devDependency）、本機 Supabase 啟動成功
 - [x] Supabase staging `fuyouxing-staging`（東京）建立並 link
 - [x] PRD v0.3.2、ADR 0001（LinkedIn 互補＋擷取管線）
-- [ ] GitHub private repo（Owner 暫緩）
+- [x] GitHub private repo `kirbyliu99M/SS-Star-Map`，`main` 已 push（2026-11-01）
 
 ### S0 · repo 可以跑（11/02–11/15）
 - [x] S0-1 AGENTS.md、PROGRESS.md（`.editorconfig`、`.gitattributes`、`.env.example` 待補）
@@ -57,7 +57,9 @@
 | 2026-11-01 | ADR 0001：LinkedIn 定位為互補；擷取管線進 MVP，來源只有履歷 PDF 與 LinkedIn「存為 PDF」，不做資料副本 ZIP |
 | 2026-11-01 | ADR 0001：AI 搜尋改低成本版（結果少才由使用者按鈕呼叫、只挑現有標籤、快取、每人每天 20 次） |
 | 2026-11-01 | 審查的 BLOCKER／MAJOR 修正併入 PRD v0.3.2（資安檢查分兩段、P1 個資規則、一鍵動作 GET＋POST 等） |
-| 2026-11-01 | GitHub repo 暫緩，只做本機 commit；CI 與 Vercel 能省就省 |
+| 2026-11-01 | GitHub repo `kirbyliu99M/SS-Star-Map`（private）；CI 與 Vercel 能省就省 |
+| 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
+| 2026-11-01 | 寄信網域：Owner 有 Cloudflare 上的網域，可給 Resend 用（spike ④ 不必延期） |
 
 ---
 

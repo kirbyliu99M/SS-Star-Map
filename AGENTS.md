@@ -1,7 +1,7 @@
 # AGENTS.md — 浮游星 ✦ 人脈書櫃
 
-> 本 repo **唯一**的 agent 指令檔。所有 agent（Claude Code、AGY 或其他工具）都先讀這份。
-> 不建立 `CLAUDE.md`、`GEMINI.md`、`.cursorrules` 等個別工具的指令檔；共用規則寫在這裡。
+> 本 repo **唯一**寫規則的 agent 指令檔。所有 agent（Claude Code、AGY 或其他工具）都先讀這份。
+> `CLAUDE.md` 只有一行 `@AGENTS.md`，讓 Claude Code 自動載入本檔（Owner 2026-11-01 決定），不在那裡寫規則。不建立 `GEMINI.md`、`.cursorrules` 等其他工具的指令檔。
 
 ## 0. 每個 session 的讀序
 
@@ -41,7 +41,8 @@
 ## 3. Repo 結構（PRD 附錄 A）
 
 ```
-AGENTS.md            ← 本檔（唯一 agent 檔）
+AGENTS.md            ← 本檔（唯一寫規則的 agent 檔）
+CLAUDE.md            ← 只有 @AGENTS.md
 PROGRESS.md          ← 任務板＋決策摘要＋session log
 apps/web/            ← Next.js
 packages/
