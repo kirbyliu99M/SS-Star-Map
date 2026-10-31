@@ -1867,8 +1867,13 @@ fuyouxing/
 │  └─ seed.sql                     40 人假圈
 ├─ docs/
 │  ├─ PRD.md
-│  ├─ adr/
+│  ├─ decisions/                   ADR（NNNN-title.md）
+│  ├─ reviews/                     審查報告
+│  ├─ plans/                       實作計畫
+│  ├─ spikes/                      spike 結論
 │  └─ runbooks/
+├─ spikes/                         S1 拋棄式驗證程式
+├─ scripts/                        安全掃描、staging 保活等
 └─ .github/workflows/              ci.yml、keepalive.yml、backup.yml
 ```
 

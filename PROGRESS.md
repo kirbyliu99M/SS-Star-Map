@@ -23,19 +23,20 @@
 - [x] S0-1 AGENTS.md、PROGRESS.md（`.editorconfig`、`.gitattributes`、`.env.example` 待補）
 - [ ] S0-2 monorepo 骨架（apps/web、packages/*、turbo）
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版
-- [ ] S0-4 Supabase config、第一支 migration（擴充套件）、pgTAP smoke、push 到 staging
+- [ ] S0-4 Supabase config、migration 0001（vector、pg_cron、pg_net）、pgTAP smoke、push 到 staging
+- [ ] S0-4b staging 手動保活腳本（anon key）；**repo 建立前每週跑一次 `pnpm db:ping:staging`**（下次：11/08）
 - [ ] S0-5 Supabase client＋環境變數驗證
 - [ ] S0-6 Vitest、Playwright smoke
-- [ ] S0-7 CI（ci.yml、keepalive.yml）
-- [ ] S0-8 vercel.json（hnd1、ignoreCommand）
-- [ ] S0-9 安全掃描腳本
+- [ ] S0-7 CI（ci.yml、keepalive.yml）〔可延到 S2〕
+- [ ] S0-8 vercel.json（hnd1、ignoreCommand）〔可延到 S2〕
+- [ ] S0-9 安全掃描腳本＋postbuild＋pre-commit〔可延到 S2〕
 
-### S1 · spike 與 P0 Gate（11/16–11/29）
-- [ ] ① 星圖 600 顆 ≥ 30 fps（先做星夜動效預算 ADR）
-- [ ] ② LINE 內建瀏覽器 OTP 登入
-- [ ] ③ PGroonga 中文搜尋
-- [ ] ④ 寄信送達率（需要網域）
-- [ ] ⑤ 擷取管線（履歷 PDF、LinkedIn 存為 PDF）
+### S1 · spike 與 P0 Gate（11/16–11/29，順序 ③→⑤→①→②→④）
+- [ ] ③ PGroonga 中文搜尋（含啟用 PGroonga）
+- [ ] ⑤ 擷取管線（只用本人或假履歷，spike 文件不貼原文）
+- [ ] ① 星圖 600 顆 ≥ 30 fps（先做星夜動效預算 ADR）〔可延到 S2〕
+- [ ] ② LINE 內建瀏覽器 OTP 登入（Supabase 內建 SMTP＋Cloudflare Tunnel）
+- [ ] ④ 寄信送達率（11/16 前沒網域就延到 S2）
 - [ ] P0 Gate（Owner：首圈訪談）
 
 ### 待 Owner
