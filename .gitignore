@@ -7,3 +7,5 @@ node_modules/
 dist/
 supabase/.branches/
 supabase/.temp/
+inbox/
+spikes/**/node_modules/
