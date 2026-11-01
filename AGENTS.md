@@ -72,7 +72,8 @@ docs/
 
 ## 4. 慣例
 
-- **依賴版本 exact pin**（`pnpm add -E`）。
+- **依賴版本 exact pin**（`pnpm add -E`）。預設只用發布滿 14 天的版本；資安修補例外，可直接用最新版。pnpm 12 另有內建的發布時間門檻，lockfile 被擋時先看 `pnpm-lock.yaml` 的變更再處理。
+- **pnpm 12**：build script 權限寫在 `pnpm-workspace.yaml` 的 `allowBuilds`，用 `pnpm approve-builds` 修改。
 - **權限寫在資料庫**：可見度一律由 RLS 執行，每條政策都要有 pgTAP 正例與反例。service role 金鑰只用在 Edge Functions、排程、不需登入的 token 端點（PRD §14.1）。
 - **ADR**：會改變 PRD 的決定寫 `docs/decisions/NNNN-title.md`（背景、決定、影響），並同步更新 PRD 與 PROGRESS 的 Decision Log。
 - **審查**：寫在 `docs/reviews/YYYY-MM-DD-topic.md`，問題標 `BLOCKER / MAJOR / MINOR / NIT`，每項附最小修正（Smallest fix）。

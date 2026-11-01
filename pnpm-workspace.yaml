@@ -2,9 +2,15 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies:
-  - supabase
+# GHSA-g3hv-75wg-m249: eslint 10.14 still pins minimatch ^10. Drop once eslint ships ^11.
+overrides:
+  minimatch@>=10 <11: 11.0.3
 
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+# The only remaining hit is minimatch 3.1.5 (eslint-plugin-import, dev only). It has no
+# firstPhasePreProcess/optimizationLevel, so the flaw is not present; flagged by range only.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-g3hv-75wg-m249
+
+allowBuilds:
+  unrs-resolver: false

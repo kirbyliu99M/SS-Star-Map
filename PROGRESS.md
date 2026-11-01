@@ -3,7 +3,7 @@
 > 規則見 `AGENTS.md` §7。每個 session 結束時更新任務板，並在 Session Log 最上面新增一筆。
 
 **目前階段：** P0 驗證 · S0（11/02–11/15）
-**最後更新：** 2026-11-01（S0-5、S0-6 完成）
+**最後更新：** 2026-11-02（套件資安更新）
 
 ---
 
@@ -24,7 +24,7 @@
 - [x] S0-2 monorepo 骨架（apps/web、packages/*、turbo）— typecheck／lint／build 通過
   - 版本（exact pin，規則：發布滿 14 天）：next 16.4.2、react 19.3.1、tailwindcss 4.3.3（v4，CSS-first，無 preset）、typescript 5.9.3、eslint 9.39.5、eslint-config-next 16.4.2、turbo 2.11.9、@types/node 24.19.2
   - TS 7.0、ESLint 10 未採用：create-next-app 16.4.2 範本仍用 TS 5／ESLint 9，Next 對新主版本的支援未查證
-- [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版
+- [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版（設計用 Pencil 畫，AGY 輔助；Owner 2026-11-02）
 - [x] S0-4 Supabase config（project_id `ss-star-map`）、migration `enable_extensions`（vector、pg_cron、pg_net）、pgTAP smoke、已 push 到 staging
 - [x] S0-4b `public.ping()`＋`scripts/ping-staging.mjs`（anon key）；`pnpm db:ping:staging` 成功。**CI keepalive 上線前每週手動跑一次**（下次：11/08）
 - [x] S0-5 `@supabase/ssr` server／browser client、Zod 驗證公開環境變數、首頁顯示 DB 狀態（Vercel production 不顯示）
@@ -63,12 +63,23 @@
 | 2026-11-01 | ADR 0001：AI 搜尋改低成本版（結果少才由使用者按鈕呼叫、只挑現有標籤、快取、每人每天 20 次） |
 | 2026-11-01 | 審查的 BLOCKER／MAJOR 修正併入 PRD v0.3.2（資安檢查分兩段、P1 個資規則、一鍵動作 GET＋POST 等） |
 | 2026-11-01 | GitHub repo `kirbyliu99M/SS-Star-Map`（private）；CI 與 Vercel 能省就省 |
+| 2026-11-02 | 資安更新：pnpm 10.17.0 → 12.16.1（10.17 有多個 high 漏洞）；next 16.4.3、eslint 10.14.0、typescript 6.0.3、turbo 2.11.10、vite 8.3.5。資安修補優先於「發布滿 14 天」規則（Owner 同意用最新版） |
+| 2026-11-02 | TS 7 暫不升：typescript-eslint 只支援 TS < 6.1；@types/node 跟執行環境維持 24.x |
+| 2026-11-02 | minimatch（GHSA-g3hv-75wg-m249）：10.x 用 override 升到 11.0.3；3.1.5 不含漏洞程式碼，audit 設為忽略並註明原因 |
+| 2026-11-02 | UI 設計用 Pencil，AGY 輔助 |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
 | 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |
 
 ---
 
 ## Session Log
+
+### 2026-11-02 · Claude Code · 套件資安更新（pnpm 12）
+- Did: 推送 S0-5／S0-6（Owner 同意）。pnpm 升到 12.16.1（全域＋`packageManager`），lockfile 依 pnpm 12 的供應鏈政策重建；套件升到最新可用版；處理 minimatch 漏洞。
+- Changed: `package.json`、`apps/web/package.json`、`packages/*/package.json`、`pnpm-workspace.yaml`（overrides、auditConfig、allowBuilds）、`pnpm-lock.yaml`
+- Verify: `pnpm audit` 無未處理漏洞（`--prod` 為 0）；typecheck、lint、build、test 2/2、e2e 2/2、test:db 5/5 全過；ESLint 10 規則實測會觸發。
+- Next: S0-3 UI（Pencil＋AGY）或 S1 spike ③，待 Owner 決定順序。
+- Blockers / 待 Owner: eslint-config-next 內的 import／react／jsx-a11y 外掛尚未宣告支援 ESLint 10（peer 警告，功能正常）；TS 7 等 typescript-eslint 支援。
 
 ### 2026-11-01 · Claude Code · S0-5 Supabase 連線、S0-6 測試工具
 - Did: 推送 S0-2～S0-4 到 `main`（Owner 同意）；記錄寄信網域；完成 S0-5（Supabase SSR client、Zod 環境變數驗證、首頁 DB 狀態）與 S0-6（Vitest、Playwright）。
