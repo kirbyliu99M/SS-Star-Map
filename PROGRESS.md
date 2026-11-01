@@ -42,9 +42,9 @@
 - [ ] P0 Gate（Owner：首圈訪談）
 
 ### 待 Owner
-- [ ] 計畫核可（`docs/plans/2026-11-01-s0-s1-plan.md`）
-- [ ] 寄信網域：spike ④ 需要，比 PRD §22 #2 的 12/13 早（11/16）
-- [ ] Anthropic API key、Resend 帳號（11/16）
+- [x] 計畫核可（`docs/plans/2026-11-01-s0-s1-plan.md`）
+- [x] 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare）；Resend 等 spike ④ 要用時再設定
+- [ ] Anthropic API key（11/16）、Resend 帳號（spike ④ 前）
 - [ ] 測試手機：中階 Android＋iPhone，各裝 LINE（11/16）
 - [ ] 首圈 15 人名單與第二位圈主（PRD §22 #1，11/15）
 - [ ] PRD【待決】：外圈信上限 10 封、P3 Gate 檢視日、SEO 預設、擷取管線起始 Sprint
@@ -61,7 +61,7 @@
 | 2026-11-01 | 審查的 BLOCKER／MAJOR 修正併入 PRD v0.3.2（資安檢查分兩段、P1 個資規則、一鍵動作 GET＋POST 等） |
 | 2026-11-01 | GitHub repo `kirbyliu99M/SS-Star-Map`（private）；CI 與 Vercel 能省就省 |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
-| 2026-11-01 | 寄信網域：Owner 有 Cloudflare 上的網域，可給 Resend 用（spike ④ 不必延期） |
+| 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |
 
 ---
 
