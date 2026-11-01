@@ -106,9 +106,12 @@ pnpm dev             # Next.js 開發伺服器（apps/web）
 pnpm build
 pnpm lint
 pnpm typecheck
+pnpm test            # Vitest（apps/web 的 *.test.ts）
+pnpm e2e             # 先 build，再用 Playwright 跑首頁 smoke（桌機＋375 px）；需要 pnpm db:start
 ```
 
-S0 完成後補上：`pnpm test`、`pnpm e2e`。
+第一次跑 e2e 前：`pnpm --filter web exec playwright install chromium`。
+本機 app 的環境變數放 `apps/web/.env.local`（gitignored），值用 `pnpm db:status -o env` 查。
 注意：`supabase migration up` 要加 `--local`，否則可能卡住等待輸入。
 
 ---

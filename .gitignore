@@ -9,3 +9,7 @@ supabase/.branches/
 supabase/.temp/
 inbox/
 spikes/**/node_modules/
+
+# Playwright
+test-results/
+playwright-report/

@@ -3,7 +3,7 @@
 > 規則見 `AGENTS.md` §7。每個 session 結束時更新任務板，並在 Session Log 最上面新增一筆。
 
 **目前階段：** P0 驗證 · S0（11/02–11/15）
-**最後更新：** 2026-11-01
+**最後更新：** 2026-11-01（S0-5、S0-6 完成）
 
 ---
 
@@ -27,8 +27,11 @@
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版
 - [x] S0-4 Supabase config（project_id `ss-star-map`）、migration `enable_extensions`（vector、pg_cron、pg_net）、pgTAP smoke、已 push 到 staging
 - [x] S0-4b `public.ping()`＋`scripts/ping-staging.mjs`（anon key）；`pnpm db:ping:staging` 成功。**CI keepalive 上線前每週手動跑一次**（下次：11/08）
-- [ ] S0-5 Supabase client＋環境變數驗證
-- [ ] S0-6 Vitest、Playwright smoke
+- [x] S0-5 `@supabase/ssr` server／browser client、Zod 驗證公開環境變數、首頁顯示 DB 狀態（Vercel production 不顯示）
+  - 版本：@supabase/ssr 0.12.7、@supabase/supabase-js 2.118.0、zod 4.6.7、server-only 0.0.1
+  - session 更新（proxy.ts）留到 S2 接登入時再加
+- [x] S0-6 Vitest（env 驗證 2 tests）、Playwright 首頁 smoke（桌機＋375 px）；`pnpm test`、`pnpm e2e`
+  - 版本：vitest 5.0.5、vite 8.3.4、@playwright/test 1.64.1
 - [ ] S0-7 CI（ci.yml、keepalive.yml）〔可延到 S2〕
 - [ ] S0-8 vercel.json（hnd1、ignoreCommand）〔可延到 S2〕
 - [ ] S0-9 安全掃描腳本＋postbuild＋pre-commit〔可延到 S2〕
@@ -66,6 +69,13 @@
 ---
 
 ## Session Log
+
+### 2026-11-01 · Claude Code · S0-5 Supabase 連線、S0-6 測試工具
+- Did: 推送 S0-2～S0-4 到 `main`（Owner 同意）；記錄寄信網域；完成 S0-5（Supabase SSR client、Zod 環境變數驗證、首頁 DB 狀態）與 S0-6（Vitest、Playwright）。
+- Changed: `apps/web/lib/`、`apps/web/app/{page,layout,db-status}.tsx`、`apps/web/{vitest,playwright}.config.ts`、`apps/web/e2e/`、`turbo.json`（build 的 env／inputs）、`AGENTS.md` §6
+- Verify: `pnpm typecheck`、`pnpm lint`、`pnpm build` 通過；`pnpm test` 2/2；`pnpm e2e` 2/2（桌機、375 px）；`pnpm test:db` 5/5。
+- Next: S0 剩下的都可延到 S2（S0-3 UI、S0-7 CI、S0-8 vercel.json、S0-9 安全掃描）；Owner 決定要先做哪些，或直接進 S1 spike ③。
+- Blockers / 待 Owner: npm 標示 eslint 9.39.5 已 deprecated（尚未評估換 ESLint 10）；11/08 手動 staging ping。
 
 ### 2026-11-01 · Claude Code · 新設備環境、PRD LinkedIn 審查、S0＋S1 計畫
 - Did: 盤點並補齊開發環境；建立本機 repo 並把 PRD 移到 `docs/`；派一個 Sonnet agent 審查 PRD 與 LinkedIn 整合；依 Owner 決定更新 PRD 到 v0.3.2 並寫 ADR 0001；建立 Supabase staging；寫 S0＋S1 計畫、AGENTS.md、PROGRESS.md。
