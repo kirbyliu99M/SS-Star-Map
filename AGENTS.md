@@ -57,6 +57,7 @@ supabase/
   tests/             ← pgTAP
   seed.sql           ← 40 人假圈（只用假資料）
 spikes/              ← S1 技術驗證的拋棄式程式
+design/              ← Pencil 設計檔（.pen）
 docs/
   PRD.md
   decisions/         ← ADR：NNNN-title.md
@@ -64,6 +65,7 @@ docs/
   plans/             ← 實作計畫
   spikes/            ← spike 結論
   proposals/         ← PRD 修改提案
+  design/            ← 文案草稿、配色交接（給 AGY 審查）
   runbooks/
 .github/workflows/   ← ci.yml、keepalive.yml、backup.yml
 ```

@@ -25,6 +25,11 @@
   - 版本（exact pin，規則：發布滿 14 天）：next 16.4.2、react 19.3.1、tailwindcss 4.3.3（v4，CSS-first，無 preset）、typescript 5.9.3、eslint 9.39.5、eslint-config-next 16.4.2、turbo 2.11.9、@types/node 24.19.2
   - TS 7.0、ESLint 10 未採用：create-next-app 16.4.2 範本仍用 TS 5／ESLint 9，Next 對新主版本的支援未查證
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版（設計用 Pencil 畫，AGY 輔助；Owner 2026-11-02）
+  - [x] Pencil 初稿：色票板、元件（按鈕、標籤、Offer 卡）、手機個人網頁 `/@anan`，三組配色並排
+  - [ ] 配色：跟 AGY 一起定（`docs/design/palette-brief.md`），不沿用 PRD 附錄 B 舊色
+  - [ ] 文案：跟 AGY 審查（`docs/design/copy-draft.md`）
+  - [ ] pen 檔存進 repo `design/starry-night.pen`（Owner 在 Pencil 另存）
+  - [ ] 程式端：tokens.css、theme.json、字體、shadcn（等配色定案）
 - [x] S0-4 Supabase config（project_id `ss-star-map`）、migration `enable_extensions`（vector、pg_cron、pg_net）、pgTAP smoke、已 push 到 staging
 - [x] S0-4b `public.ping()`＋`scripts/ping-staging.mjs`（anon key）；`pnpm db:ping:staging` 成功。**CI keepalive 上線前每週手動跑一次**（下次：11/08）
 - [x] S0-5 `@supabase/ssr` server／browser client、Zod 驗證公開環境變數、首頁顯示 DB 狀態（Vercel production 不顯示）
@@ -66,7 +71,9 @@
 | 2026-11-02 | 資安更新：pnpm 10.17.0 → 12.16.1（10.17 有多個 high 漏洞）；next 16.4.3、eslint 10.14.0、typescript 6.0.3、turbo 2.11.10、vite 8.3.5。資安修補優先於「發布滿 14 天」規則（Owner 同意用最新版） |
 | 2026-11-02 | TS 7 暫不升：typescript-eslint 只支援 TS < 6.1；@types/node 跟執行環境維持 24.x |
 | 2026-11-02 | minimatch（GHSA-g3hv-75wg-m249）：10.x 用 override 升到 11.0.3；3.1.5 不含漏洞程式碼，audit 設為忽略並註明原因 |
-| 2026-11-02 | UI 設計用 Pencil，AGY 輔助 |
+| 2026-11-02 | UI 設計用 Pencil，AGY 輔助；文案與配色都要跟 AGY 審查／共同處理，Claude Code 不單獨定案 |
+| 2026-11-02 | 配色不沿用 PRD 附錄 B 舊色，重新設計（未拍板 candidate） |
+| 2026-11-02 | GitHub 暫停推送，只做本機 commit，Owner 說再推 |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
 | 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |
 
