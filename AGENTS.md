@@ -88,7 +88,7 @@ docs/
 - repo 裡不放任何真實會員資料。測試與設計一律用 `seed.sql` 的假圈。
 - 履歷、LinkedIn PDF 等測試檔放在 gitignored 的 `inbox/`，不 commit。
 - 密鑰只放 `.env*`（gitignored）或 Vercel／Supabase 後台；`.env.example` 只寫變數名稱。staging DB 密碼在 `.env.staging.local`。
-- 不在對話或 log 中印出密鑰；需要時用 `grep -v` 過濾。
+- 不在對話或 log 中印出密鑰；需要時用 `grep -v` 過濾。密鑰一律經環境變數傳遞，不放在指令列參數（pnpm、docker 都可能把參數印出或留在程序清單）。
 
 ---
 
@@ -101,7 +101,7 @@ pnpm db:status       # 顯示本機 API、Studio、Mailpit 網址
 pnpm db:reset        # 重建本機 DB＋seed
 pnpm db:stop
 pnpm test:db         # pgTAP（supabase/tests/）
-pnpm db:push:staging # 把 migration 推到 staging（需要 DB 密碼：-p，或先 set -a; . ./.env.staging.local）
+pnpm db:push:staging # 把 migration 推到 staging（腳本自己讀 .env.staging.local；不要用 -p 傳密碼，pnpm 會把指令列印出來）
 pnpm db:ping:staging # staging 保活
 pnpm supabase <cmd>  # 其他 Supabase CLI 指令
 

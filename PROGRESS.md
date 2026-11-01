@@ -42,7 +42,7 @@
 - [ ] S0-9 安全掃描腳本＋postbuild＋pre-commit〔可延到 S2〕
 
 ### S1 · spike 與 P0 Gate（11/16–11/29，順序 ③→⑤→①→②→④）
-- [ ] ③ PGroonga 中文搜尋（含啟用 PGroonga）
+- [x] ③ PGroonga 中文搜尋 — **通過**：最佳策略（同義詞標籤優先＋查詢切 2-gram 再 OR）30/30 前 5 筆命中，staging 與本機一致。結論見 `docs/spikes/03-pgroonga.md`；索引設定與查詢策略為未拍板（candidate）
 - [ ] ⑤ 擷取管線（只用本人或假履歷，spike 文件不貼原文）
 - [ ] ① 星圖 600 顆 ≥ 30 fps（先做星夜動效預算 ADR）〔可延到 S2〕
 - [ ] ② LINE 內建瀏覽器 OTP 登入（Supabase 內建 SMTP＋Cloudflare Tunnel）
@@ -73,6 +73,8 @@
 | 2026-11-02 | minimatch（GHSA-g3hv-75wg-m249）：10.x 用 override 升到 11.0.3；3.1.5 不含漏洞程式碼，audit 設為忽略並註明原因 |
 | 2026-11-02 | UI 設計用 Pencil，AGY 輔助；文案與配色都要跟 AGY 審查／共同處理，Claude Code 不單獨定案 |
 | 2026-11-02 | 配色不沿用 PRD 附錄 B 舊色，重新設計（未拍板 candidate） |
+| 2026-11-02 | spike ③ 通過；建議 TokenBigramSplitSymbolAlphaDigit＋NormalizerNFKC150、查詢走 RPC（未拍板 candidate） |
+| 2026-11-02 | 資安事件：staging DB 密碼經 `-p` 參數被 pnpm 印到 session 輸出；改用 `scripts/db-push-staging.mjs` 經環境變數傳遞。是否輪替密碼待 Owner 決定 |
 | 2026-11-02 | GitHub 暫停推送，只做本機 commit，Owner 說再推 |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
 | 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |
@@ -80,6 +82,13 @@
 ---
 
 ## Session Log
+
+### 2026-11-02 · Claude Code · S0-3 設計初稿、spike ③
+- Did: Pencil 畫星夜初稿（色票、元件、手機個人網頁，三組新配色）；文案與配色交給 AGY（`docs/design/`）。派 Sonnet agent 跑 spike ③，通過。修正 staging 推送方式，避免密碼出現在指令列。
+- Changed: `docs/design/`、`docs/spikes/03-pgroonga.md`、`spikes/03-pgroonga/`、`supabase/migrations/20261101180716_enable_pgroonga.sql`、`supabase/tests/database/00_smoke.test.sql`、`scripts/db-push-staging.mjs`、`package.json`、`AGENTS.md`
+- Verify: `pnpm test:db` 6/6；`pnpm db:push:staging --dry-run` 顯示 staging 已是最新，輸出不含密碼。
+- Next: spike ⑤ 擷取管線（需要 Anthropic API key 與 Owner 自己的履歷，放 `inbox/`）；配色與文案等 AGY。
+- Blockers / 待 Owner: 是否輪替 staging DB 密碼；Pencil 檔另存到 `design/starry-night.pen`；Anthropic API key。
 
 ### 2026-11-02 · Claude Code · 套件資安更新（pnpm 12）
 - Did: 推送 S0-5／S0-6（Owner 同意）。pnpm 升到 12.16.1（全域＋`packageManager`），lockfile 依 pnpm 12 的供應鏈政策重建；套件升到最新可用版；處理 minimatch 漏洞。

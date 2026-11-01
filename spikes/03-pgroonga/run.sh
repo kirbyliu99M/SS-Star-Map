@@ -10,7 +10,8 @@ if [ "$TARGET" = local ]; then
     -v miss_cfg="$CFG" -v miss_mode="$MODE" -P pager=off
 else
   set -a; . ../../.env.staging.local; set +a
-  printf '%s\n' "$SQL" | docker run --rm -i -e PGPASSWORD="$SUPABASE_STAGING_DB_PASSWORD" postgres:17 \
+  export PGPASSWORD="$SUPABASE_STAGING_DB_PASSWORD"
+  printf '%s\n' "$SQL" | docker run --rm -i -e PGPASSWORD postgres:17 \
     psql -h aws-0-ap-northeast-1.pooler.supabase.com -p 5432 -U postgres.hsrtjqjtylzospbcvtho -d postgres \
     -v ON_ERROR_STOP=1 -v miss_cfg="$CFG" -v miss_mode="$MODE" -P pager=off
 fi

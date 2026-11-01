@@ -16,7 +16,7 @@
     "db:status": "supabase status",
     "db:reset": "supabase db reset",
     "test:db": "supabase test db",
-    "db:push:staging": "supabase db push --linked",
+    "db:push:staging": "node scripts/db-push-staging.mjs",
     "db:ping:staging": "node scripts/ping-staging.mjs",
     "e2e": "turbo run build --filter=web && pnpm --filter web e2e"
   },
