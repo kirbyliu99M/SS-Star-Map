@@ -18,7 +18,9 @@
     "test:db": "supabase test db",
     "db:push:staging": "node scripts/db-push-staging.mjs",
     "db:ping:staging": "node scripts/ping-staging.mjs",
-    "e2e": "turbo run build --filter=web && pnpm --filter web e2e"
+    "e2e": "turbo run build --filter=web && pnpm --filter web e2e",
+    "scan:secrets": "node scripts/security/scan.mjs --all",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "supabase": "2.122.0",

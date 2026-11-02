@@ -1,0 +1,3 @@
+#!/bin/sh
+# 密鑰掃描（AGENTS.md §9）。不要用 --no-verify 跳過。
+exec node scripts/security/scan.mjs --staged

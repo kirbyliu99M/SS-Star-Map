@@ -13,3 +13,6 @@ spikes/**/node_modules/
 # Playwright
 test-results/
 playwright-report/
+
+# Pencil 設計檔不進 repo；UI 以 design/screens/ 的 PNG 分享
+*.pen

@@ -39,8 +39,8 @@
 - [x] S0-6 Vitest（env 驗證 2 tests）、Playwright 首頁 smoke（桌機＋375 px）；`pnpm test`、`pnpm e2e`
   - 版本：vitest 5.0.5、vite 8.3.4、@playwright/test 1.64.1
 - [ ] S0-7 CI（ci.yml、keepalive.yml）〔可延到 S2〕
-- [ ] S0-8 vercel.json（hnd1、ignoreCommand）〔可延到 S2〕
-- [ ] S0-9 安全掃描腳本＋postbuild＋pre-commit〔可延到 S2〕
+- [ ] S0-8 vercel.json（hnd1、ignoreCommand）＋preview 只留一個（AGENTS §9.2）〔可延到 S2〕
+- [x] S0-9 `scripts/security/scan.mjs`＋pre-commit／pre-push hook＋build 後掃 `.next/static`；全歷史掃描通過（2026-11-02）。CI 接上待 S0-7
 
 ### S1 · spike 與 P0 Gate（11/16–11/29，順序 ③→⑤→①→②→④）
 - [x] ③ PGroonga 中文搜尋 — **通過**：最佳策略（同義詞標籤優先＋查詢切 2-gram 再 OR）30/30 前 5 筆命中，staging 與本機一致。結論見 `docs/spikes/03-pgroonga.md`；索引設定與查詢策略為未拍板（candidate）
@@ -77,6 +77,7 @@
 | 2026-11-02 | spike ③ 通過；建議 TokenBigramSplitSymbolAlphaDigit＋NormalizerNFKC150、查詢走 RPC（未拍板 candidate） |
 | 2026-11-02 | 資安事件：staging DB 密碼經 `-p` 參數被 pnpm 印到 session 輸出；改用 `scripts/db-push-staging.mjs` 經環境變數傳遞。是否輪替密碼待 Owner 決定 |
 | 2026-11-02 | GitHub 暫停推送，只做本機 commit，Owner 說再推 |
+| 2026-11-02 | Commit／Push 規則（AGENTS §9）：UI 變更附 `design/screens/` 截圖、`.pen` 不進 repo；Vercel preview 只留最新一個；pre-commit／pre-push 密鑰掃描，禁止 `--no-verify` |
 | 2026-11-02 | 主意象出現「書櫃 vs 浮游星」的提議；先用兩版首頁做 5 秒測試，結果出來再寫 ADR 改 PRD §13.1（未拍板 candidate） |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
 | 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |

@@ -1,0 +1,3 @@
+#!/bin/sh
+# 密鑰掃描：檢查即將推送的所有 commit（AGENTS.md §9）。不要用 --no-verify 跳過。
+exec node scripts/security/scan.mjs --push

@@ -57,7 +57,9 @@ supabase/
   tests/             ← pgTAP
   seed.sql           ← 40 人假圈（只用假資料）
 spikes/              ← S1 技術驗證的拋棄式程式
-design/              ← Pencil 設計檔（.pen）
+design/screens/      ← UI 截圖（PNG，從 Pencil 匯出或實機截圖）；.pen 不進 repo（§9）
+scripts/security/    ← 密鑰掃描 scan.mjs（§9）
+.githooks/           ← pre-commit、pre-push（`pnpm run prepare` 啟用）
 docs/
   PRD.md
   decisions/         ← ADR：NNNN-title.md
@@ -111,6 +113,8 @@ pnpm lint
 pnpm typecheck
 pnpm test            # Vitest（apps/web 的 *.test.ts）
 pnpm e2e             # 先 build，再用 Playwright 跑首頁 smoke（桌機＋375 px）；需要 pnpm db:start
+pnpm scan:secrets    # 掃整段 git 歷史有沒有密鑰（§9）
+pnpm run prepare     # 啟用 .githooks（clone 後必跑一次；pnpm install 不一定會觸發）
 ```
 
 第一次跑 e2e 前：`pnpm --filter web exec playwright install chromium`。
@@ -141,7 +145,38 @@ pnpm e2e             # 先 build，再用 Playwright 跑首頁 smoke（桌機＋
 - [ ] `pnpm build`、`pnpm lint`、`pnpm typecheck` 無錯誤
 - [ ] `pnpm test`、`pnpm test:db` 全綠（動到 RLS 時必跑）
 - [ ] 最新審查沒有未處理的 BLOCKER／MAJOR（或已在 `docs/decisions/` 記錄豁免）
-- [ ] 安全掃描沒有發現；diff 裡沒有密鑰或個資
+- [ ] 安全掃描沒有發現；diff 裡沒有密鑰或個資（hook 會擋，見 §9）
+- [ ] 有 UI 變更時，`design/screens/` 的截圖已更新
 - [ ] 有畫面變更時，在手機寬度（375 px）與桌機看過；reduced-motion 檢查過
 - [ ] `PROGRESS.md` 已更新
 - [ ] push 到 `main` 只在 Owner 同意後
+
+---
+
+## 9. Commit 與 Push（Owner 2026-11-02，為邀請協作夥伴而訂）
+
+推送 `main` 仍需 Owner 同意（§1 第 4 條）。以下規則所有人、所有 agent 都適用。
+
+### 9.1 UI 截圖隨 push，`.pen` 不進 repo
+- 有 UI 變更的 push，要同時更新 `design/screens/` 的 PNG，讓沒有 Pencil 的夥伴也看得到畫面：
+  - Pencil 設計稿：用 Pencil 匯出 PNG（2x），檔名用 kebab-case 說明畫面，例如 `circle-home-library-test.png`。同一畫面改版就覆蓋舊檔，歷史交給 git。
+  - 程式畫面：手機 375 px 與桌機各一張。
+  - PR 說明裡嵌入改動前後的截圖。
+- `.pen` 已列入 `.gitignore`，不 commit。設計檔怎麼分享給夥伴，未拍板（candidate）。
+- pre-push hook 發現 UI 程式有變更、卻沒有更新 `design/screens/` 時會提醒，但不會擋下。
+
+### 9.2 Vercel preview 只留一個
+- 新的 preview 部署成功後，刪除先前所有 preview，同一時間只留最新的一個；production 不刪。目的是省 deployment storage（§1 第 6 條）。
+- 實作還沒做：在 S0-7／S0-8 的 CI 部署完成後，呼叫 Vercel API 刪掉舊 preview（`VERCEL_TOKEN` 放 GitHub secrets）。Vercel 專案建立前要 Owner 同意。
+
+### 9.3 嚴格防止密鑰外洩
+- `.githooks/pre-commit` 掃 staged 變更，`.githooks/pre-push` 掃所有即將推出的 commit。clone 後先跑 `pnpm run prepare` 啟用 hook。
+- **禁止 `--no-verify`**。被擋下時，把密鑰移出檔案後重新 commit；如果密鑰已經進了 commit，要改寫那個 commit，不能只在後面再加一個 commit 刪掉。
+- 掃描項目（`scripts/security/scan.mjs`）：
+  - 已知格式：Anthropic、Resend、Supabase secret／access token、service_role JWT、帶密碼的 Postgres 網址、GitHub token、AWS key、私鑰、`*PASSWORD=`／`*SECRET=` 一類的賦值。
+  - 本機 `.env*` 裡每個非 `NEXT_PUBLIC_*` 變數的實際值（例如 staging DB 密碼）。這是抓到自訂密碼唯一的方法。
+  - 禁止進 repo 的檔案：`.env*`（`.env.example` 除外）、`.pen`、`inbox/`、`.pem`／`.key`。
+- `apps/web` 的 build 會掃 `.next/static`，避免密鑰被打包進前端。
+- 誤判時，在該行加 `secret-scan:allow`，並在 PR 說明原因。
+- **已推送的密鑰一律視為外洩**：先輪替，再清理歷史。
+- 結果只印位置與規則名稱，不印密鑰內容；回報問題時也不要貼出密鑰。
