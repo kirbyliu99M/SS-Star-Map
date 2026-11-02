@@ -16,3 +16,6 @@ playwright-report/
 
 # Pencil 設計檔不進 repo；UI 以 design/screens/ 的 PNG 分享
 *.pen
+
+# Vercel CLI 連結資料
+.vercel/

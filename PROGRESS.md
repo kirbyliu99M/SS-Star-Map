@@ -39,7 +39,11 @@
 - [x] S0-6 Vitest（env 驗證 2 tests）、Playwright 首頁 smoke（桌機＋375 px）；`pnpm test`、`pnpm e2e`
   - 版本：vitest 5.0.5、vite 8.3.4、@playwright/test 1.64.1
 - [ ] S0-7 CI（ci.yml、keepalive.yml）〔可延到 S2〕
-- [ ] S0-8 vercel.json（hnd1、ignoreCommand）＋preview 只留一個（AGENTS §9.2）〔可延到 S2〕
+- [ ] S0-8 Vercel：專案 `kirby-at-ntu/ss-star-map` 已由 Owner 建立（2026-11-02，Root `apps/web`、Next.js preset）
+  - [x] `apps/web/vercel.json`（hnd1、ignoreCommand）、`engines.node 24.x`、preview 清理 workflow（預設只列出）
+  - [ ] 下次 push 後確認：pnpm 12 在 Vercel 能否安裝、Node 是否變成 24、ignoreCommand 是否正常
+  - [ ] Owner：GitHub 設定 `VERCEL_TOKEN`（secret）、`VERCEL_PROJECT_ID`、`VERCEL_TEAM_SLUG`（variables）
+  - [ ] Owner：整理 Vercel 環境變數（Supabase integration 帶進來的 service role 等，見 Session Log）
 - [x] S0-9 `scripts/security/scan.mjs`＋pre-commit／pre-push hook＋build 後掃 `.next/static`；全歷史掃描通過（2026-11-02）。CI 接上待 S0-7
 
 ### S1 · spike 與 P0 Gate（11/16–11/29，順序 ③→⑤→①→②→④）
@@ -85,6 +89,13 @@
 ---
 
 ## Session Log
+
+### 2026-11-02 · Claude Code · Commit／Push 規則、密鑰掃描、Vercel 設定
+- Did: AGENTS §9（截圖、`.pen` 不進 repo、preview 只留一個、密鑰掃描）。S0-9 掃描腳本與 hook。Vercel 專案現況（唯讀檢查）：Root `apps/web`、Next.js preset、Node 26.x、build 在 iad1；目前 production 是舊 commit `a12d721`，用 pnpm 10 建置。專案上有 Supabase integration 帶進來的變數（`POSTGRES_*`、`SUPABASE_SERVICE_ROLE_KEY`、`SUPABASE_JWT_SECRET`、`SUPABASE_SECRET_KEY` 等），連到哪個 Supabase 專案未確認。
+- Changed: `AGENTS.md`、`.gitignore`、`package.json`、`apps/web/package.json`、`apps/web/vercel.json`、`scripts/security/scan.mjs`、`scripts/vercel-prune-previews.mjs`、`.githooks/`、`.github/workflows/vercel-prune-previews.yml`、`design/screens/`
+- Verify: 假密鑰測試 repo 全部抓到；`pnpm scan:secrets` 全歷史通過；`pnpm build` 通過（含 `.next/static` 掃描）；prune 腳本只做語法檢查，未對 Vercel 實測。
+- Next: 下次 push 後看 Vercel build（pnpm 12、Node 24）；preview 清理先試跑。
+- Blockers / 待 Owner: Vercel 環境變數範圍；GitHub secrets／variables；push 時機。
 
 ### 2026-11-02 · Claude Code · AGY 審查、意象測試稿
 - Did: 用 `agy -p --mode accept-edits` 派 AGY 審文案與配色（headless 不能執行終端機指令，計算由 Claude Code 先做好再交給它）。驗算四組配色對比度並修正 AGY 高估的 AAA 說法。Pencil 做書房版／星空版圈內首頁，寫 5 秒測試設計，AGY 審後改成兩階段、質化判讀。

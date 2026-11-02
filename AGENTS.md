@@ -162,12 +162,15 @@ pnpm run prepare     # 啟用 .githooks（clone 後必跑一次；pnpm install �
   - Pencil 設計稿：用 Pencil 匯出 PNG（2x），檔名用 kebab-case 說明畫面，例如 `circle-home-library-test.png`。同一畫面改版就覆蓋舊檔，歷史交給 git。
   - 程式畫面：手機 375 px 與桌機各一張。
   - PR 說明裡嵌入改動前後的截圖。
-- `.pen` 已列入 `.gitignore`，不 commit。設計檔怎麼分享給夥伴，未拍板（candidate）。
+- `.pen` 已列入 `.gitignore`，不 commit。設計檔不分享給夥伴，除非 Owner 自己另外分享（Owner 2026-11-02）；夥伴看 `design/screens/` 的截圖。
 - pre-push hook 發現 UI 程式有變更、卻沒有更新 `design/screens/` 時會提醒，但不會擋下。
 
 ### 9.2 Vercel preview 只留一個
 - 新的 preview 部署成功後，刪除先前所有 preview，同一時間只留最新的一個；production 不刪。目的是省 deployment storage（§1 第 6 條）。
-- 實作還沒做：在 S0-7／S0-8 的 CI 部署完成後，呼叫 Vercel API 刪掉舊 preview（`VERCEL_TOKEN` 放 GitHub secrets）。Vercel 專案建立前要 Owner 同意。
+- 實作：`.github/workflows/vercel-prune-previews.yml` 在 preview 部署成功後執行 `scripts/vercel-prune-previews.mjs`。
+  - 需要 GitHub secret `VERCEL_TOKEN`，以及 GitHub variables `VERCEL_PROJECT_ID`、`VERCEL_TEAM_SLUG`。
+  - variable `VERCEL_PRUNE=1` 才會真的刪；沒設時只列出要刪哪些。第一次先看列出的清單，確認沒問題再打開。
+- Vercel 專案：`kirby-at-ntu/ss-star-map`，Root Directory `apps/web`，Framework Preset Next.js。Functions 區域與「沒改到 app 就跳過 build」寫在 `apps/web/vercel.json`。
 
 ### 9.3 嚴格防止密鑰外洩
 - `.githooks/pre-commit` 掃 staged 變更，`.githooks/pre-push` 掃所有即將推出的 commit。clone 後先跑 `pnpm run prepare` 啟用 hook。
