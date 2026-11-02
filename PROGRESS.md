@@ -26,8 +26,9 @@
   - TS 7.0、ESLint 10 未採用：create-next-app 16.4.2 範本仍用 TS 5／ESLint 9，Next 對新主版本的支援未查證
 - [ ] S0-3 Tailwind、shadcn/ui、字體、星夜 token 第一版（設計用 Pencil 畫，AGY 輔助；Owner 2026-11-02）
   - [x] Pencil 初稿：色票板、元件（按鈕、標籤、Offer 卡）、手機個人網頁 `/@anan`，三組配色並排
-  - [ ] 配色：跟 AGY 一起定（`docs/design/palette-brief.md`），不沿用 PRD 附錄 B 舊色
-  - [ ] 文案：跟 AGY 審查（`docs/design/copy-draft.md`）
+  - [ ] 主意象：書房 vs 星空，做 5 秒測試再定（`docs/design/concept-test.md`）；Pencil 已有兩版首頁測試稿。配色等這一項
+  - [ ] 配色：AGY 已分析並新增 D 組，四組對比度都過 AA；待 Owner 拍板（`docs/design/palette-brief.md`）
+  - [ ] 文案：AGY 已審 1–35 項，待 Owner 拍板（`docs/design/copy-draft.md`）
   - [ ] pen 檔存進 repo `design/starry-night.pen`（Owner 在 Pencil 另存）
   - [ ] 程式端：tokens.css、theme.json、字體、shadcn（等配色定案）
 - [x] S0-4 Supabase config（project_id `ss-star-map`）、migration `enable_extensions`（vector、pg_cron、pg_net）、pgTAP smoke、已 push 到 staging
@@ -76,12 +77,20 @@
 | 2026-11-02 | spike ③ 通過；建議 TokenBigramSplitSymbolAlphaDigit＋NormalizerNFKC150、查詢走 RPC（未拍板 candidate） |
 | 2026-11-02 | 資安事件：staging DB 密碼經 `-p` 參數被 pnpm 印到 session 輸出；改用 `scripts/db-push-staging.mjs` 經環境變數傳遞。是否輪替密碼待 Owner 決定 |
 | 2026-11-02 | GitHub 暫停推送，只做本機 commit，Owner 說再推 |
+| 2026-11-02 | 主意象出現「書櫃 vs 浮游星」的提議；先用兩版首頁做 5 秒測試，結果出來再寫 ADR 改 PRD §13.1（未拍板 candidate） |
 | 2026-11-01 | 保留 AGENTS.md 為唯一規則檔，另建只有 `@AGENTS.md` 的 CLAUDE.md |
 | 2026-11-01 | 寄信網域：`ssmail.kirby-fivesenses.com`（Cloudflare），給 Resend 用；Resend 專案設定等 spike ④ 需要時再做 |
 
 ---
 
 ## Session Log
+
+### 2026-11-02 · Claude Code · AGY 審查、意象測試稿
+- Did: 用 `agy -p --mode accept-edits` 派 AGY 審文案與配色（headless 不能執行終端機指令，計算由 Claude Code 先做好再交給它）。驗算四組配色對比度並修正 AGY 高估的 AAA 說法。Pencil 做書房版／星空版圈內首頁，寫 5 秒測試設計，AGY 審後改成兩階段、質化判讀。
+- Changed: `docs/design/copy-draft.md`、`docs/design/palette-brief.md`、`docs/design/concept-test.md`、`PROGRESS.md`
+- Verify: 對比度用 WCAG 2.1 公式計算（腳本在 session scratchpad，未進 repo）；Pencil 截圖檢查版面。
+- Next: Owner 安排 5 秒測試 → 定主意象 → 定配色與文案 → tokens.css／theme.json、PRD §13.1 與附錄 B、ADR。
+- Blockers / 待 Owner: 5 秒測試的受測者；配色與文案拍板；Pencil 另存到 `design/`；staging 密碼是否輪替。
 
 ### 2026-11-02 · Claude Code · S0-3 設計初稿、spike ③
 - Did: Pencil 畫星夜初稿（色票、元件、手機個人網頁，三組新配色）；文案與配色交給 AGY（`docs/design/`）。派 Sonnet agent 跑 spike ③，通過。修正 staging 推送方式，避免密碼出現在指令列。
